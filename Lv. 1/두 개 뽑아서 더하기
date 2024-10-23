@@ -1,0 +1,26 @@
+문제 설명
+
+정수 배열 numbers가 주어집니다. 
+numbers에서 서로 다른 인덱스에 있는 두 개의 수를 뽑아 더해서 만들 수 있는 모든 수를 배열에 오름차순으로 담아 return 하도록 solution 함수를 완성해주세요.
+
+
+
+풀이
+
+def solution(numbers):
+    a = []
+    n = len(numbers)
+    
+    for i in range(n):
+        for j in range(i + 1, n):
+            a.append(numbers[i] + numbers[j])
+            
+    return sorted(list(set(a)))
+
+
+
+설명
+
+이중 for문을 사용해서 요소를 각각 하나씩 더하고, 그 결과를 a배열에 추가한다.
+모든 경우의 수가 포함되므로 중복되는 값은 set로 제거하고 다시 list의 형태로 바꾼다 -> list(set(a)
+결과물을 오름차순으로 반환해야 하므로 sorted를 사용하여 오름차순으로 정렬해주고 반환

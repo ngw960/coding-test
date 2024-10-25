@@ -1,0 +1,27 @@
+문제 설명
+
+문자열로 구성된 리스트 strings와, 정수 n이 주어졌을 때, 각 문자열의 인덱스 n번째 글자를 기준으로 오름차순 정렬하려 합니다. 
+예를 들어 strings가 ["sun", "bed", "car"]이고 n이 1이면 각 단어의 인덱스 1의 문자 "u", "e", "a"로 strings를 정렬합니다.
+
+
+
+풀이
+
+def solution(strings, n):
+    a = sorted(strings, key = lambda x : (x[n], x))
+    
+    return a
+
+
+
+설명
+
+strings리스트의 각 요소를 x로 표현하고 x의 n번 인덱스롤 기준으로 오름차순 정렬한다.
+=> sorted(strings, key = lambda x : x[n])
+
+위의 식은 strings가 ["sun", "bed", "car"] 일때는 통과하지만
+n번 인덱스가 서로 같고 ["abce", "abcd", "cdx"]처럼 abce와 abcd는 오름차순 기준으로 abcd가 먼저 정렬되야 하는데
+c 를 기준으로 정렬하게 되면 인자로 받은 순서가 abce가 abcd보다 먼저 정렬된다.
+그러므로 한가지 조건을 더 추가해서 예외 처리를 해 주었다.
+=> sorted(stirngs, key = lambda x : x[n])
+

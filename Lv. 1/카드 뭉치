@@ -1,0 +1,54 @@
+문제 설명
+
+코니는 영어 단어가 적힌 카드 뭉치 두 개를 선물로 받았습니다. 
+코니는 다음과 같은 규칙으로 카드에 적힌 단어들을 사용해 원하는 순서의 단어 배열을 만들 수 있는지 알고 싶습니다.
+원하는 카드 뭉치에서 카드를 순서대로 한 장씩 사용합니다.
+한 번 사용한 카드는 다시 사용할 수 없습니다.
+카드를 사용하지 않고 다음 카드로 넘어갈 수 없습니다.
+기존에 주어진 카드 뭉치의 단어 순서는 바꿀 수 없습니다.
+예를 들어 첫 번째 카드 뭉치에 순서대로 ["i", "drink", "water"], 
+두 번째 카드 뭉치에 순서대로 ["want", "to"]가 적혀있을 때 
+["i", "want", "to", "drink", "water"] 순서의 단어 배열을 만들려고 한다면 
+첫 번째 카드 뭉치에서 "i"를 사용한 후 두 번째 카드 뭉치에서 "want"와 "to"를 사용하고 
+첫 번째 카드뭉치에 "drink"와 "water"를 차례대로 사용하면 원하는 순서의 단어 배열을 만들 수 있습니다.
+문자열로 이루어진 배열 cards1, cards2와 원하는 단어 배열 goal이 매개변수로 주어질 때, 
+cards1과 cards2에 적힌 단어들로 goal를 만들 있다면 "Yes"를, 만들 수 없다면 "No"를 return하는 solution 함수를 완성해주세요.
+
+
+
+풀이
+
+def solution(cards1, cards2, goal):
+    compare = []
+    
+    for i in goal:
+        if cards1 and cards1[0] == i:
+            cards1.remove(cards1[0])
+            compare.append(i)
+        elif cards2 and cards2[0] == i:
+            cards2.remove(cards2[0])
+            compare.append(i)
+            
+    if compare == goal:
+        result = 'Yes'
+    else:
+        result = 'No'
+            
+    return result
+
+
+
+설명
+
+문제 설명에서 '카드를 사용하지 않고 다음 카드로 넘어갈 수 없습니다' 조건에 의해 각각 카드뭉치의 맨 앞 카드를 먼저 사용해야 하므로
+카드뭉치 리스트의 0번 인덱스가 goal리스트의 요소와 일치를 확인하는 방법을 사용했다. 
+
+리스트의 특성상 요소를 remove로 삭제하면
+비워진 인덱스에 다음 요소가 채워지므로 일치하면 카드뭉치에서 사용한 카드를 삭제했다. --> cards1.remove(cards1[0])
+
+그리고 goal을 만들수 있는지 확인하기 위해 compare리스트를 만들어서 비교하였는데,
+제한사항 - cards1과 cards2에는 서로 다른 단어만 존재합니다. 에 의하면
+goal요소와 cards1, cards2의 요소가 둘다 일치하지 않으면 goal을 만들 수 없다는 뜻이므로
+compare리스트를 따로 만들어서 비교하지 않아도 된다.
+
+

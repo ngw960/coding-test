@@ -1,0 +1,47 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/172928
+
+
+
+풀이
+
+def solution(park, routes):
+    a = 0
+    b = 0
+    w = len(park[0]) -1
+    h = len(park) - 1
+
+    for i in range(len(park)):
+        for j in range(len(park[i])):
+            if park[i][j] == 'S':
+                a, b = i, j
+
+    for i in routes:
+        if i[0] == 'E' and b + int(i[2]) <= w:
+            for j in range(1, int(i[2]) + 1):
+                if park[a][b + j] == 'X':
+                    break
+            else:
+                b += int(i[2])
+
+        elif i[0] == 'W' and b - int(i[2]) >= 0:
+            for j in range(1, int(i[2]) + 1):
+                if park[a][b - j] == 'X':
+                    break
+            else:
+                b -= int(i[2])
+
+        elif i[0] == 'S' and a + int(i[2]) <= h:
+            for j in range(1, int(i[2]) + 1):
+                if park[a + j][b] == 'X':
+                    break
+            else:
+                a += int(i[2])
+
+        elif i[0] == 'N' and a - int(i[2]) >= 0:
+            for j in range(1, int(i[2]) + 1):
+                if park[a - j][b] == 'X':
+                    break
+            else:
+                a -= int(i[2])
+
+    return [a,b]
